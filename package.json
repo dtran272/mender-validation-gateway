@@ -1,0 +1,36 @@
+{
+  "name": "mender-validation-manager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src/app.ts",
+    "prod": "npm run build && node dist/app.js",
+    "dev": "ts-node src/app.ts",
+    "clean": "tsc --build --clean",
+    "build": "npm run clean && tsc -p .",
+    "watch": "tsc -p . -w",
+    "lint": "tslint -c tslint.json src/*.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "lodash": "^4.17.15",
+    "tsoa": "^2.5.9"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.6",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.2",
+    "@types/lodash": "^4.14.149",
+    "@types/node": "^12.12.11",
+    "nodemon": "^2.0.1",
+    "ts-node": "^8.5.2",
+    "typescript": "^3.7.2"
+  }
+}
