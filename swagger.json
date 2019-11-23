@@ -1,0 +1,174 @@
+{
+	"basePath": "/api/v1",
+	"consumes": [
+		"application/json"
+	],
+	"definitions": {
+		"BusinessStatusModel": {
+			"properties": {
+				"status": {
+					"type": "string"
+				},
+				"isValid": {
+					"type": "boolean"
+				}
+			},
+			"required": [
+				"status",
+				"isValid"
+			],
+			"type": "object",
+			"additionalProperties": true
+		},
+		"BusinessModel": {
+			"properties": {
+				"name": {
+					"type": "string"
+				},
+				"address": {
+					"type": "string"
+				},
+				"telephone": {
+					"type": "string"
+				},
+				"rbqNum": {
+					"type": "string"
+				},
+				"neqId": {
+					"type": "number",
+					"format": "double"
+				},
+				"status": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"name",
+				"address",
+				"telephone",
+				"rbqNum",
+				"neqId",
+				"status"
+			],
+			"type": "object",
+			"additionalProperties": true
+		}
+	},
+	"info": {
+		"title": "mender-validation-manager",
+		"version": "1.0.0",
+		"license": {
+			"name": "ISC"
+		}
+	},
+	"paths": {
+		"/license/status/{rbqNum}": {
+			"get": {
+				"operationId": "GetStatusByRbq",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/BusinessStatusModel"
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "rbqNum",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		},
+		"/license/{rbqNum}": {
+			"get": {
+				"operationId": "GetInfoByRbq",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/BusinessModel"
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "rbqNum",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		},
+		"/license/status/{neqId}": {
+			"get": {
+				"operationId": "GetStatusByNeq",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/BusinessStatusModel"
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "neqId",
+						"required": true,
+						"format": "double",
+						"type": "number"
+					}
+				]
+			}
+		},
+		"/license/{neqId}": {
+			"get": {
+				"operationId": "GetInfoByNeq",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/BusinessModel"
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "neqId",
+						"required": true,
+						"format": "double",
+						"type": "number"
+					}
+				]
+			}
+		}
+	},
+	"produces": [
+		"application/json"
+	],
+	"swagger": "2.0",
+	"securityDefinitions": {},
+	"host": "localhost:3000"
+}

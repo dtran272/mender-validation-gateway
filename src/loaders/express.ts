@@ -1,10 +1,11 @@
 import bodyParser from "body-parser";
 import cors from "cors";
-import { Application } from "express";
-import routes from "../api";
-import config from "../config/config";
+import * as express from "express";
+import * as swaggerUi from "swagger-ui-express";
+import "../api/controllers/licenseController";
+import { RegisterRoutes } from "../api/routes/routes";
 
-export default ({ app }: { app: Application }) => {
+export default ({ app }: { app: express.Express }) => {
     /**
      * Health Check endpoints
      */
@@ -25,6 +26,14 @@ export default ({ app }: { app: Application }) => {
     // Middlewares
     app.use(bodyParser.json());
 
+    // Swagger
+    try {
+        const swaggerDoc = require("../../swagger.json");
+        app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerDoc));
+    } catch (err) {
+        console.error("Unable to read swagger.json", err);
+    }
+
     // API routes
-    app.use(config.api.prefix, routes());
+    RegisterRoutes(app);
 };
