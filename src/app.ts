@@ -1,10 +1,13 @@
 import express, { Application, Request, Response } from "express";
-import config from "./config/env";
+import config from "./config/config";
 
-const app: Application = express();
+async function startServer() {
+  const app: Application = express();
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Hello");
-});
+  // Loads App's dependencies
+  await require("./loaders/loader").default({ expressApp: app });
 
-app.listen(config.port, () => console.log("Server running"));
+  app.listen(config.port, () => console.log("Server running"));
+}
+
+startServer();

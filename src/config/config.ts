@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 process.env.NODE_ENV = process.env.NODE_ENV || "dev";
 
 const envFound = dotenv.config({
-  path: `./src/config/env/${process.env.NODE_ENV}.env`
+  path: `./src/config/settings/${process.env.NODE_ENV}.env`
 });
 
 if (!envFound) {
