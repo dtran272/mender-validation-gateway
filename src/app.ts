@@ -1,12 +1,12 @@
 import express, { Application } from "express";
 
-import config from "./config/config";
+import config from "./api/config/config";
 
 async function startServer() {
     const app = express();
 
     // Loads App's dependencies
-    await require("./loaders/loader").default({ expressApp: app });
+    await require("./api/loaders/loader").default({ expressApp: app });
 
     app.listen(config.port, () => console.log("Server running"));
 }

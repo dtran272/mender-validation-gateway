@@ -1,13 +1,17 @@
+import { StatusType } from "../../common/enums/status";
+
 export interface IBusiness {
     name: string;
     address: string;
     telephone: string;
     rbqNum: string;
     neqId: number;
-    status: string;
+    status: StatusType;
 }
 
 export interface IBusinessStatus {
-    status: string;
+    name: string;
+    rbqNum: string;
+    status: StatusType;
     isValid: boolean;
 }

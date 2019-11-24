@@ -9,10 +9,17 @@ import * as express from 'express';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
 const models: TsoaRoute.Models = {
+    "StatusType": {
+        "dataType": "refEnum",
+        "enums": ["Valide", "Invalide"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "BusinessStatusModel": {
         "dataType": "refObject",
         "properties": {
-            "status": { "dataType": "string", "required": true },
+            "name": { "dataType": "string", "required": true },
+            "rbqNum": { "dataType": "string", "required": true },
+            "status": { "ref": "StatusType", "required": true },
             "isValid": { "dataType": "boolean", "required": true },
         },
         "additionalProperties": true,
@@ -26,7 +33,7 @@ const models: TsoaRoute.Models = {
             "telephone": { "dataType": "string", "required": true },
             "rbqNum": { "dataType": "string", "required": true },
             "neqId": { "dataType": "double", "required": true },
-            "status": { "dataType": "string", "required": true },
+            "status": { "ref": "StatusType", "required": true },
         },
         "additionalProperties": true,
     },

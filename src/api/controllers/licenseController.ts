@@ -1,6 +1,7 @@
 import { Controller, Get, Route } from "tsoa";
-import { BusinessModel } from "../../models/business";
-import { BusinessStatusModel } from "../../models/businessStatus";
+import { StatusType } from "../../common/enums/status";
+import { BusinessModel } from "../models/business";
+import { BusinessStatusModel } from "../models/businessStatus";
 
 @Route("/license")
 export class LicenseController extends Controller {
@@ -8,7 +9,7 @@ export class LicenseController extends Controller {
     @Get("/status/{rbqNum}")
     public async getStatusByRbq(rbqNum: string): Promise<BusinessStatusModel> {
         // TODO call scrapper service to validate on RBQ website if the license number is valid.
-        const businessStatus = new BusinessStatusModel("Valide", true);
+        const businessStatus = new BusinessStatusModel("Home Depot", "5679-1213-01", StatusType.VALIDE);
 
         this.setStatus(200);
         return businessStatus;
@@ -35,7 +36,7 @@ export class LicenseController extends Controller {
     @Get("/status/{neqId}")
     public async getStatusByNeq(neqId: number): Promise<BusinessStatusModel> {
         // TODO call scrapper service to validate on RBQ website if the NEQ ID is valid.
-        const businessStatus = new BusinessStatusModel("Valide", true);
+        const businessStatus = new BusinessStatusModel("Home Depot", "5679-1213-01", StatusType.VALIDE);
 
         this.setStatus(200);
         return businessStatus;

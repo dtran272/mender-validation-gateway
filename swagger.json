@@ -4,16 +4,31 @@
 		"application/json"
 	],
 	"definitions": {
+		"StatusType": {
+			"enum": [
+				"Valide",
+				"Invalide"
+			],
+			"type": "string"
+		},
 		"BusinessStatusModel": {
 			"properties": {
-				"status": {
+				"name": {
 					"type": "string"
+				},
+				"rbqNum": {
+					"type": "string"
+				},
+				"status": {
+					"$ref": "#/definitions/StatusType"
 				},
 				"isValid": {
 					"type": "boolean"
 				}
 			},
 			"required": [
+				"name",
+				"rbqNum",
 				"status",
 				"isValid"
 			],
@@ -39,7 +54,7 @@
 					"format": "double"
 				},
 				"status": {
-					"type": "string"
+					"$ref": "#/definitions/StatusType"
 				}
 			},
 			"required": [

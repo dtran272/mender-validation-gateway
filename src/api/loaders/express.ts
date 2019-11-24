@@ -2,8 +2,8 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import * as express from "express";
 import * as swaggerUi from "swagger-ui-express";
-import "../api/controllers/licenseController";
-import { RegisterRoutes } from "../api/routes/routes";
+import "../controllers/licenseController";
+import { RegisterRoutes } from "../routes/routes";
 
 export default ({ app }: { app: express.Express }) => {
     /**
@@ -28,7 +28,7 @@ export default ({ app }: { app: express.Express }) => {
 
     // Swagger
     try {
-        const swaggerDoc = require("../../swagger.json");
+        const swaggerDoc = require("../../../swagger.json");
         app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerDoc));
     } catch (err) {
         console.error("Unable to read swagger.json", err);
