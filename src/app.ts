@@ -1,5 +1,4 @@
-import express, { Application } from "express";
-
+import express from "express";
 import config from "./api/config/config";
 
 async function startServer() {

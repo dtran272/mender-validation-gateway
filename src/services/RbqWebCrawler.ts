@@ -1,18 +1,20 @@
+import config from "../api/config/config";
 import { BusinessModel } from "../api/models/business";
 import { BusinessStatusModel } from "../api/models/businessStatus";
 import { IWebCrawler } from "../interfaces/services/IWebCrawler";
 
-export class RbqCrawler implements IWebCrawler<BusinessModel> {
+export class RbqWebCrawler implements IWebCrawler<BusinessModel> {
     public baseUrl: string;
     private model: BusinessModel;
 
-    constructor(baseUrl: string) {
-        this.baseUrl = baseUrl;
+    constructor() {
+        this.baseUrl = config.rbqBaseUrl;
         this.model = new BusinessModel();
     }
 
-    public startCrawl(): void {
+    public run(): void {
         // TODO implement headless crawler here
+
         this.model = new BusinessModel(
             "Home Depot",
             "123 short street",
