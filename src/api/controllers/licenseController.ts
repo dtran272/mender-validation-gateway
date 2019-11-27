@@ -21,11 +21,15 @@ export class LicenseController extends Controller {
         // TODO call scrapper service to scrape all info based on rbq license number.
         const business = new BusinessModel(
             "Home Depot",
-            "123 short street",
-            "514-123-4567",
+            "Groupe Reno",
             "5679-1213-01",
+            "Valide",
+            new Date("2019-11-05"),
+            new Date("2019-11-05"),
             1169504009,
-            "Valide"
+            "123 short street",
+            "asdb@sdv.com",
+            "514-123-4567"
         );
 
         this.setStatus(200);
@@ -48,11 +52,15 @@ export class LicenseController extends Controller {
         // TODO call scrapper service to scrape all info based on NEQ ID.
         const business = new BusinessModel(
             "Home Depot",
-            "123 short street",
-            "514-123-4567",
+            "Groupe Reno",
             "5679-1213-01",
+            "Valide",
+            new Date("2019-11-05"),
+            new Date("2019-11-05"),
             1169504009,
-            "Valide"
+            "123 short street",
+            "asdb@sdv.com",
+            "514-123-4567"
         );
 
         this.setStatus(200);

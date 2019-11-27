@@ -3,27 +3,50 @@ import { IBusiness } from "../../interfaces/models/IBusiness";
 
 export class BusinessModel implements IBusiness {
     public name: string;
-    public address: string;
-    public telephone: string;
+    public otherName: string;
     public rbqNum: string;
-    public neqId: number;
     public status: StatusType;
+    public deliveranceDate: Date;
+    public paymentDate: Date;
+    public neqId: number;
+    public address: string;
+    public email: string;
+    public telephone: string;
 
     constructor();
-    constructor(name: string, address: string, telephone: string, rbqNum: string, neqId: number, status: string);
+    constructor(
+        name: string,
+        otherName: string,
+        rbqNum: string,
+        status: string,
+        deliveranceDate: Date,
+        paymentDate: Date,
+        neqId: number,
+        address: string,
+        email: string,
+        telephone: string
+    );
     constructor(
         name?: string,
-        address?: string,
-        telephone?: string,
+        otherName?: string,
         rbqNum?: string,
+        status?: string,
+        deliveranceDate?: Date,
+        paymentDate?: Date,
         neqId?: number,
-        status?: string
+        address?: string,
+        email?: string,
+        telephone?: string
     ) {
         this.name = name!;
-        this.address = address!;
-        this.telephone = telephone!;
+        this.otherName = otherName!;
         this.rbqNum = rbqNum!;
-        this.neqId = neqId!;
         this.status = (StatusType as any)[status!.toLocaleUpperCase()];
+        this.deliveranceDate = deliveranceDate!;
+        this.paymentDate = paymentDate!;
+        this.neqId = neqId!;
+        this.address = address!;
+        this.email = email!;
+        this.telephone = telephone!;
     }
 }

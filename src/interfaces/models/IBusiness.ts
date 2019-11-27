@@ -2,11 +2,15 @@ import { StatusType } from "../../common/enums/status";
 
 export interface IBusiness {
     name: string;
-    address: string;
-    telephone: string;
+    otherName: string;
     rbqNum: string;
-    neqId: number;
     status: StatusType;
+    deliveranceDate: Date;
+    paymentDate: Date;
+    neqId: number;
+    address: string;
+    email: string;
+    telephone: string;
 }
 
 export interface IBusinessStatus {

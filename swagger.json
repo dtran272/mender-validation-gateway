@@ -40,30 +40,48 @@
 				"name": {
 					"type": "string"
 				},
-				"address": {
-					"type": "string"
-				},
-				"telephone": {
+				"otherName": {
 					"type": "string"
 				},
 				"rbqNum": {
 					"type": "string"
 				},
+				"status": {
+					"$ref": "#/definitions/StatusType"
+				},
+				"deliveranceDate": {
+					"type": "string",
+					"format": "date-time"
+				},
+				"paymentDate": {
+					"type": "string",
+					"format": "date-time"
+				},
 				"neqId": {
 					"type": "number",
 					"format": "double"
 				},
-				"status": {
-					"$ref": "#/definitions/StatusType"
+				"address": {
+					"type": "string"
+				},
+				"email": {
+					"type": "string"
+				},
+				"telephone": {
+					"type": "string"
 				}
 			},
 			"required": [
 				"name",
-				"address",
-				"telephone",
+				"otherName",
 				"rbqNum",
+				"status",
+				"deliveranceDate",
+				"paymentDate",
 				"neqId",
-				"status"
+				"address",
+				"email",
+				"telephone"
 			],
 			"type": "object",
 			"additionalProperties": true
