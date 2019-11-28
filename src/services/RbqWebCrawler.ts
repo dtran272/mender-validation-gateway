@@ -1,9 +1,17 @@
 import * as puppeteer from "puppeteer";
 import { BusinessModel } from "../api/models/business";
 import { BusinessStatusModel } from "../api/models/businessStatus";
-import { WebCrawler } from "./WebCrawler";
+import { IWebCrawler } from "../interfaces/services/IWebCrawler";
 
-export class RbqWebCrawler extends WebCrawler<BusinessModel> {
+export class RbqWebCrawler implements IWebCrawler<BusinessModel> {
+    private baseUrl: string;
+    private model: BusinessModel;
+
+    constructor(baseUrl: string) {
+        this.baseUrl = baseUrl;
+        this.model = new BusinessModel();
+    }
+
     public async run(rbqNum: string): Promise<void> {
         // Launch headless chrome browser.
         const browser = await puppeteer.launch();
@@ -17,12 +25,6 @@ export class RbqWebCrawler extends WebCrawler<BusinessModel> {
 
     public getInfo(): BusinessModel {
         return this.model;
-    }
-
-    public getLicenseStatus(): BusinessStatusModel {
-        const businessStatus = new BusinessStatusModel(this.model.name, this.model.rbqNum, this.model.status);
-
-        return businessStatus;
     }
 
     private async crawl(page: puppeteer.Page, rbqNum: string): Promise<BusinessModel> {
