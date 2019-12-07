@@ -5,6 +5,7 @@
         "module": "commonjs",
         "outDir": "./dist",
         "rootDir": "./src",
+        "sourceMap": true,
 
         /* Strict Type-Checking Options */
         "strict": true,
@@ -15,6 +16,7 @@
 
         /* Advanced Options */
         "forceConsistentCasingInFileNames": true,
-        "experimentalDecorators": true
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true
     }
 }

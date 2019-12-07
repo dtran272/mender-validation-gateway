@@ -3,9 +3,10 @@ import cors from "cors";
 import * as express from "express";
 import * as swaggerUi from "swagger-ui-express";
 import "../controllers/licenseController";
+import { errorHandler } from "../middlewares/ErrorHandler";
 import { RegisterRoutes } from "../routes/routes";
 
-export default ({ app }: { app: express.Express }) => {
+export default async ({ app }: { app: express.Express }) => {
     /**
      * Health Check endpoints
      */
@@ -30,10 +31,13 @@ export default ({ app }: { app: express.Express }) => {
     try {
         const swaggerDoc = require("../../../swagger.json");
         app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerDoc));
-    } catch (err) {
-        console.error("Unable to read swagger.json", err);
+    } catch (e) {
+        console.error("Unable to read swagger.json", e);
     }
 
     // API routes
     RegisterRoutes(app);
+
+    // Error Handler Middlewares
+    app.use(errorHandler);
 };

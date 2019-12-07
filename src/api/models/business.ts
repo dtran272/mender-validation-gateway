@@ -41,7 +41,7 @@ export class BusinessModel implements IBusiness {
         this.name = name!;
         this.otherName = otherName!;
         this.rbqNum = rbqNum!;
-        this.status = (StatusType as any)[status!.toLocaleUpperCase()];
+        this.status = status ? (StatusType as any)[status.toLocaleUpperCase()] : StatusType.UNDEFINED;
         this.deliveranceDate = deliveranceDate!;
         this.paymentDate = paymentDate!;
         this.neqId = neqId!;

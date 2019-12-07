@@ -7,7 +7,8 @@
 		"StatusType": {
 			"enum": [
 				"Valide",
-				"Invalide"
+				"Invalide",
+				"Undefined"
 			],
 			"type": "string"
 		},

@@ -1,4 +1,5 @@
 export enum StatusType {
     VALIDE = "Valide",
-    INVALIDE = "Invalide"
+    INVALIDE = "Invalide",
+    UNDEFINED = "Undefined"
 }
