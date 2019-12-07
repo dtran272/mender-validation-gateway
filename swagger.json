@@ -94,7 +94,7 @@
 		}
 	},
 	"info": {
-		"title": "mender-validation-manager",
+		"title": "mender-validation-gateway",
 		"version": "1.0.0",
 		"license": {
 			"name": "ISC"
