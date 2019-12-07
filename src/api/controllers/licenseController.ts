@@ -1,6 +1,7 @@
 import { Mediator } from "tsmediator";
 import { Controller, Get, Route } from "tsoa";
 import { StatusType } from "../../common/enums/status";
+import { GetInfoByRbqHandler } from "../../domain/handlers/GetInfoByRbqHandler";
 import { GetStatusByRbqHandler } from "../../domain/handlers/GetStatusByRbqHandler";
 import { BusinessModel } from "../models/business";
 import { BusinessStatusModel } from "../models/businessStatus";
@@ -27,18 +28,7 @@ export class LicenseController extends Controller {
     @Get("/{rbqNum}")
     public async getInfoByRbq(rbqNum: string): Promise<BusinessModel> {
         // TODO call scrapper service to scrape all info based on rbq license number.
-        const business = new BusinessModel(
-            "Home Depot",
-            "Groupe Reno",
-            "5679-1213-01",
-            "Valide",
-            new Date("2019-11-05"),
-            new Date("2019-11-05"),
-            1169504009,
-            "123 short street",
-            "asdb@sdv.com",
-            "514-123-4567"
-        );
+        const business = await this.mediator.Send(GetInfoByRbqHandler.Type, rbqNum);
 
         this.setStatus(200);
         return business;
