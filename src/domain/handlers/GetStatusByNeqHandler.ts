@@ -1,25 +1,25 @@
 import { Handler, ICommandHandler } from "tsmediator";
 import { Container } from "typedi";
 import { BusinessModel } from "../../api/models/business";
+import { BusinessStatusModel } from "../../api/models/businessStatus";
 import { IWebCrawler } from "../../interfaces/services/IWebCrawler";
 import { RbqWebCrawler } from "../../services/RbqWebCrawler";
-import { BusinessStatusModel } from "./../../api/models/businessStatus";
 
-@Handler(GetStatusByRbqHandler.Type)
-export class GetStatusByRbqHandler implements ICommandHandler<string, Promise<BusinessStatusModel>> {
+@Handler(GetStatusByNeqHandler.Type)
+export class GetStatusByNeqHandler implements ICommandHandler<number, Promise<BusinessStatusModel>> {
     private crawler: IWebCrawler<BusinessModel>;
 
     constructor() {
         this.crawler = Container.get<RbqWebCrawler>("rbq.webCrawler");
     }
 
-    public static get Type(): string {
-        return "GetStatusByRbq";
+    public static get Type() {
+        return "GetStatusByNeq";
     }
 
-    public async Handle(rbqNum: string): Promise<BusinessStatusModel> {
+    public async Handle(neqId: number): Promise<BusinessStatusModel> {
         // Run the crawler to scrape info needed.
-        await this.crawler.run(rbqNum);
+        await this.crawler.run(neqId);
 
         const businessInfo = this.crawler.getInfo();
 

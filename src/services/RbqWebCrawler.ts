@@ -17,15 +17,16 @@ export class RbqWebCrawler implements IWebCrawler<BusinessModel> {
         this.model = new BusinessModel();
     }
 
-    public async run(rbqNum: string): Promise<void> {
-        // Launch headless chrome browser.
-        const browser = await puppeteer.launch({ headless: false });
+    public async run(id: string | number): Promise<void> {
+        // Launch chrome browser. Add { headless: false } for testing purposes.
+        // For more info visit: https://pptr.dev/#?product=Puppeteer&version=v2.0.0&show=api-puppeteerlaunchoptions
+        const browser = await puppeteer.launch();
 
         try {
             // Create a new page(tab) to navigate
             const page = await browser.newPage();
 
-            this.model = await this.crawl(page, rbqNum);
+            this.model = await this.crawl(page, id);
         } catch (e) {
             throw e;
         } finally {
@@ -37,12 +38,17 @@ export class RbqWebCrawler implements IWebCrawler<BusinessModel> {
         return this.model;
     }
 
-    private async crawl(page: puppeteer.Page, rbqNum: string): Promise<BusinessModel> {
+    private async crawl(page: puppeteer.Page, id: string | number): Promise<BusinessModel> {
         // Go to target page
         await page.goto(this.baseUrl);
 
-        // Enter Rbq license number in the text box
-        await page.type("[name=NoLicence]", rbqNum);
+        if (typeof id === "number") {
+            // Enter NEQ ID in the text box
+            await page.type("[name=NEQ]", id.toString());
+        } else {
+            // Enter RBQ license number in the text box
+            await page.type("[name=NoLicence]", id);
+        }
 
         // Click on "Recherche"(search) button. This will trigger a naviation event
         // and we'll have to wait unti page.waitForNavigation() promise to
@@ -89,7 +95,7 @@ export class RbqWebCrawler implements IWebCrawler<BusinessModel> {
             );
         } catch (e) {
             if (e instanceof TimeoutError) {
-                throw new LicenseNotFoundException(rbqNum, e);
+                throw new LicenseNotFoundException(id, e);
             }
 
             throw new WebScrappingException(e);

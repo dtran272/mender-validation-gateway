@@ -1,7 +1,8 @@
 import { Mediator } from "tsmediator";
 import { Controller, Get, Route } from "tsoa";
-import { StatusType } from "../../common/enums/status";
+import { GetInfoByNeqHandler } from "../../domain/handlers/GetInfoByNeqHandler";
 import { GetInfoByRbqHandler } from "../../domain/handlers/GetInfoByRbqHandler";
+import { GetStatusByNeqHandler } from "../../domain/handlers/GetStatusByNeqHandler";
 import { GetStatusByRbqHandler } from "../../domain/handlers/GetStatusByRbqHandler";
 import { BusinessModel } from "../models/business";
 import { BusinessStatusModel } from "../models/businessStatus";
@@ -16,7 +17,7 @@ export class LicenseController extends Controller {
     }
 
     // "GET license status of business given its RBQ number"
-    @Get("/status/{rbqNum}")
+    @Get("/rbq/status/{rbqNum}")
     public async getStatusByRbq(rbqNum: string): Promise<BusinessStatusModel> {
         const businessStatus = await this.mediator.Send(GetStatusByRbqHandler.Type, rbqNum);
 
@@ -25,9 +26,8 @@ export class LicenseController extends Controller {
     }
 
     // "GET info of business given its RBQ number"
-    @Get("/{rbqNum}")
+    @Get("/rbq/{rbqNum}")
     public async getInfoByRbq(rbqNum: string): Promise<BusinessModel> {
-        // TODO call scrapper service to scrape all info based on rbq license number.
         const business = await this.mediator.Send(GetInfoByRbqHandler.Type, rbqNum);
 
         this.setStatus(200);
@@ -35,31 +35,18 @@ export class LicenseController extends Controller {
     }
 
     // "GET license status of business given its NEQ ID"
-    @Get("/status/{neqId}")
+    @Get("/neq/status/{neqId}")
     public async getStatusByNeq(neqId: number): Promise<BusinessStatusModel> {
-        // TODO call scrapper service to validate on RBQ website if the NEQ ID is valid.
-        const businessStatus = new BusinessStatusModel("Home Depot", "5679-1213-01", StatusType.VALIDE);
+        const businessStatus = await this.mediator.Send(GetStatusByNeqHandler.Type, neqId);
 
         this.setStatus(200);
         return businessStatus;
     }
 
     // "GET info of business given its NEQ ID"
-    @Get("/{neqId}")
+    @Get("/neq/{neqId}")
     public async getInfoByNeq(neqId: number): Promise<BusinessModel> {
-        // TODO call scrapper service to scrape all info based on NEQ ID.
-        const business = new BusinessModel(
-            "Home Depot",
-            "Groupe Reno",
-            "5679-1213-01",
-            "Valide",
-            new Date("2019-11-05"),
-            new Date("2019-11-05"),
-            1169504009,
-            "123 short street",
-            "asdb@sdv.com",
-            "514-123-4567"
-        );
+        const business = await this.mediator.Send(GetInfoByNeqHandler.Type, neqId);
 
         this.setStatus(200);
         return business;

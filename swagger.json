@@ -25,13 +25,18 @@
 				},
 				"isValid": {
 					"type": "boolean"
+				},
+				"neqId": {
+					"type": "number",
+					"format": "double"
 				}
 			},
 			"required": [
 				"name",
 				"rbqNum",
 				"status",
-				"isValid"
+				"isValid",
+				"neqId"
 			],
 			"type": "object",
 			"additionalProperties": true
@@ -96,7 +101,7 @@
 		}
 	},
 	"paths": {
-		"/license/status/{rbqNum}": {
+		"/license/rbq/status/{rbqNum}": {
 			"get": {
 				"operationId": "GetStatusByRbq",
 				"produces": [
@@ -121,7 +126,7 @@
 				]
 			}
 		},
-		"/license/{rbqNum}": {
+		"/license/rbq/{rbqNum}": {
 			"get": {
 				"operationId": "GetInfoByRbq",
 				"produces": [
@@ -146,7 +151,7 @@
 				]
 			}
 		},
-		"/license/status/{neqId}": {
+		"/license/neq/status/{neqId}": {
 			"get": {
 				"operationId": "GetStatusByNeq",
 				"produces": [
@@ -172,7 +177,7 @@
 				]
 			}
 		},
-		"/license/{neqId}": {
+		"/license/neq/{neqId}": {
 			"get": {
 				"operationId": "GetInfoByNeq",
 				"produces": [

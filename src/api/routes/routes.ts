@@ -21,6 +21,7 @@ const models: TsoaRoute.Models = {
             "rbqNum": { "dataType": "string", "required": true },
             "status": { "ref": "StatusType", "required": true },
             "isValid": { "dataType": "boolean", "required": true },
+            "neqId": { "dataType": "double", "required": true },
         },
         "additionalProperties": true,
     },
@@ -52,7 +53,7 @@ export function RegisterRoutes(app: express.Express) {
     //  NOTE: If you do not see routes for all of your controllers in this file, then you might not have informed tsoa of where to look
     //      Please look into the "controllerPathGlobs" config option described in the readme: https://github.com/lukeautry/tsoa
     // ###########################################################################################################
-    app.get('/api/v1/license/status/:rbqNum',
+    app.get('/api/v1/license/rbq/status/:rbqNum',
         function(request: any, response: any, next: any) {
             const args = {
                 rbqNum: { "in": "path", "name": "rbqNum", "required": true, "dataType": "string" },
@@ -74,7 +75,7 @@ export function RegisterRoutes(app: express.Express) {
             promiseHandler(controller, promise, response, next);
         });
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    app.get('/api/v1/license/:rbqNum',
+    app.get('/api/v1/license/rbq/:rbqNum',
         function(request: any, response: any, next: any) {
             const args = {
                 rbqNum: { "in": "path", "name": "rbqNum", "required": true, "dataType": "string" },
@@ -96,7 +97,7 @@ export function RegisterRoutes(app: express.Express) {
             promiseHandler(controller, promise, response, next);
         });
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    app.get('/api/v1/license/status/:neqId',
+    app.get('/api/v1/license/neq/status/:neqId',
         function(request: any, response: any, next: any) {
             const args = {
                 neqId: { "in": "path", "name": "neqId", "required": true, "dataType": "double" },
@@ -118,7 +119,7 @@ export function RegisterRoutes(app: express.Express) {
             promiseHandler(controller, promise, response, next);
         });
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    app.get('/api/v1/license/:neqId',
+    app.get('/api/v1/license/neq/:neqId',
         function(request: any, response: any, next: any) {
             const args = {
                 neqId: { "in": "path", "name": "neqId", "required": true, "dataType": "double" },
