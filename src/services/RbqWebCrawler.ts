@@ -1,20 +1,21 @@
 import puppeteer from "puppeteer";
 import { TimeoutError } from "puppeteer/Errors";
 import { Service } from "typedi";
+import { isNumber } from "util";
 import config from "../api/config/config";
-import { BusinessModel } from "../api/models/business";
+import { BusinessInfoModel } from "../api/models/businessInfo";
 import { LicenseNotFoundException } from "../exceptions/LicenseNotFoundException";
 import { WebScrappingException } from "../exceptions/WebScrappingException";
 import { IWebCrawler } from "../interfaces/services/IWebCrawler";
 
 @Service("rbq.webCralwer")
-export class RbqWebCrawler implements IWebCrawler<BusinessModel> {
+export class RbqWebCrawler implements IWebCrawler<BusinessInfoModel> {
     private baseUrl: string;
-    private model: BusinessModel;
+    private model: BusinessInfoModel;
 
     constructor() {
         this.baseUrl = config.rbqBaseUrl;
-        this.model = new BusinessModel();
+        this.model = new BusinessInfoModel();
     }
 
     public async run(id: string | number): Promise<void> {
@@ -34,15 +35,15 @@ export class RbqWebCrawler implements IWebCrawler<BusinessModel> {
         }
     }
 
-    public getInfo(): BusinessModel {
+    public getInfo(): BusinessInfoModel {
         return this.model;
     }
 
-    private async crawl(page: puppeteer.Page, id: string | number): Promise<BusinessModel> {
+    private async crawl(page: puppeteer.Page, id: string | number): Promise<BusinessInfoModel> {
         // Go to target page
         await page.goto(this.baseUrl);
 
-        if (typeof id === "number") {
+        if (isNumber(id)) {
             // Enter NEQ ID in the text box
             await page.type("[name=NEQ]", id.toString());
         } else {
@@ -81,7 +82,7 @@ export class RbqWebCrawler implements IWebCrawler<BusinessModel> {
                 return info.map(data => data.innerText.trim());
             }, infoSelector);
 
-            return new BusinessModel(
+            return new BusinessInfoModel(
                 compName,
                 dataArray[0],
                 dataArray[1],

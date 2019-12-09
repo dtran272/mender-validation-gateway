@@ -1,7 +1,7 @@
 import { StatusType } from "../../common/enums/status";
 import { IBusiness } from "../../interfaces/models/IBusiness";
 
-export class BusinessModel implements IBusiness {
+export class BusinessInfoModel implements IBusiness {
     public name: string;
     public otherName: string;
     public rbqNum: string;

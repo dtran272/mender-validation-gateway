@@ -19,3 +19,8 @@ export interface IBusinessStatus {
     status: StatusType;
     isValid: boolean;
 }
+
+export interface IBusinessRequest {
+    rbqNum: string;
+    neqId: number;
+}

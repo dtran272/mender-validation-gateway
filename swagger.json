@@ -41,7 +41,7 @@
 			"type": "object",
 			"additionalProperties": true
 		},
-		"BusinessModel": {
+		"BusinessInfoModel": {
 			"properties": {
 				"name": {
 					"type": "string"
@@ -136,7 +136,7 @@
 					"200": {
 						"description": "Ok",
 						"schema": {
-							"$ref": "#/definitions/BusinessModel"
+							"$ref": "#/definitions/BusinessInfoModel"
 						}
 					}
 				},
@@ -187,7 +187,7 @@
 					"200": {
 						"description": "Ok",
 						"schema": {
-							"$ref": "#/definitions/BusinessModel"
+							"$ref": "#/definitions/BusinessInfoModel"
 						}
 					}
 				},

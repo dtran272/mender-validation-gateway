@@ -1,13 +1,13 @@
 import { Handler, ICommandHandler } from "tsmediator";
 import { Container } from "typedi";
-import { BusinessModel } from "../../api/models/business";
+import { BusinessInfoModel } from "../../api/models/businessInfo";
 import { BusinessStatusModel } from "../../api/models/businessStatus";
 import { IWebCrawler } from "../../interfaces/services/IWebCrawler";
 import { RbqWebCrawler } from "../../services/RbqWebCrawler";
 
 @Handler(GetStatusByNeqHandler.Type)
 export class GetStatusByNeqHandler implements ICommandHandler<number, Promise<BusinessStatusModel>> {
-    private crawler: IWebCrawler<BusinessModel>;
+    private crawler: IWebCrawler<BusinessInfoModel>;
 
     constructor() {
         this.crawler = Container.get<RbqWebCrawler>("rbq.webCrawler");
