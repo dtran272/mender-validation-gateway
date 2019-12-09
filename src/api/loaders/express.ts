@@ -3,7 +3,7 @@ import cors from "cors";
 import * as express from "express";
 import * as swaggerUi from "swagger-ui-express";
 import "../controllers/licenseController";
-import { errorHandler } from "../middlewares/ErrorHandler";
+import { errorHandler } from "../middlewares/errorHandler";
 import { RegisterRoutes } from "../routes/routes";
 
 export default async ({ app }: { app: express.Express }) => {

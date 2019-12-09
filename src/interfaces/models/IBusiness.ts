@@ -1,4 +1,4 @@
-import { StatusType } from "../../common/enums/status";
+import { StatusType } from "../../common/enums/StatusType";
 
 export interface IBusiness {
     name: string;

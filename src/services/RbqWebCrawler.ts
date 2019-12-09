@@ -1,9 +1,9 @@
 import puppeteer from "puppeteer";
 import { TimeoutError } from "puppeteer/Errors";
 import { Service } from "typedi";
-import { isNumber } from "util";
 import config from "../api/config/config";
 import { BusinessInfoModel } from "../api/models/businessInfo";
+import { SearchType } from "../common/enums/SearchType";
 import { LicenseNotFoundException } from "../exceptions/LicenseNotFoundException";
 import { WebScrappingException } from "../exceptions/WebScrappingException";
 import { IWebCrawler } from "../interfaces/services/IWebCrawler";
@@ -18,7 +18,7 @@ export class RbqWebCrawler implements IWebCrawler<BusinessInfoModel> {
         this.model = new BusinessInfoModel();
     }
 
-    public async run(id: string | number): Promise<void> {
+    public async run(id: string, searchType: SearchType): Promise<void> {
         // Launch chrome browser. Add { headless: false } for testing purposes.
         // For more info visit: https://pptr.dev/#?product=Puppeteer&version=v2.0.0&show=api-puppeteerlaunchoptions
         const browser = await puppeteer.launch();
@@ -27,7 +27,7 @@ export class RbqWebCrawler implements IWebCrawler<BusinessInfoModel> {
             // Create a new page(tab) to navigate
             const page = await browser.newPage();
 
-            this.model = await this.crawl(page, id);
+            this.model = await this.crawl(page, id, searchType);
         } catch (e) {
             throw e;
         } finally {
@@ -39,13 +39,13 @@ export class RbqWebCrawler implements IWebCrawler<BusinessInfoModel> {
         return this.model;
     }
 
-    private async crawl(page: puppeteer.Page, id: string | number): Promise<BusinessInfoModel> {
+    private async crawl(page: puppeteer.Page, id: string, searchType: SearchType): Promise<BusinessInfoModel> {
         // Go to target page
         await page.goto(this.baseUrl);
 
-        if (isNumber(id)) {
+        if (searchType === SearchType.NEQ) {
             // Enter NEQ ID in the text box
-            await page.type("[name=NEQ]", id.toString());
+            await page.type("[name=NEQ]", id);
         } else {
             // Enter RBQ license number in the text box
             await page.type("[name=NoLicence]", id);
@@ -96,7 +96,7 @@ export class RbqWebCrawler implements IWebCrawler<BusinessInfoModel> {
             );
         } catch (e) {
             if (e instanceof TimeoutError) {
-                throw new LicenseNotFoundException(id, e);
+                throw new LicenseNotFoundException(id, searchType, e);
             }
 
             throw new WebScrappingException(e);

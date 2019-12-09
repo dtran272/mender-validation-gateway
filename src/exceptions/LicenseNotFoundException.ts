@@ -1,10 +1,11 @@
+import { SearchType } from "../common/enums/SearchType";
 import { HttpException } from "./HttpException";
 
 export class LicenseNotFoundException extends HttpException {
-    constructor(id: string | number, err: any) {
+    constructor(id: string, searchType: SearchType, err: any) {
         let message = "";
 
-        if (typeof id === "number") {
+        if (searchType === SearchType.NEQ) {
             message = `License with NEQ: ${id} not found. ERROR => ${err}`;
         } else {
             message = `RBQ license number ${id} not found. ERROR => ${err}`;

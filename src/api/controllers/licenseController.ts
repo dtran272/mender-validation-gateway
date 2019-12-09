@@ -8,23 +8,21 @@ import { InvalidNeqIdException } from "../../exceptions/InvalidNeqIdException";
 import { InvalidRbqNumberException } from "../../exceptions/InvalidRbqNumberException";
 import { BusinessInfoModel } from "../models/businessInfo";
 import { BusinessStatusModel } from "../models/businessStatus";
-import { LicenseRequestValidator } from "../validators/LicenseRequestValidator";
+import { validateNeqId, validateRbqNumber } from "../validators/licenseRequestValidator";
 
 @Route("/license")
 export class LicenseController extends Controller {
     private mediator: Mediator;
-    private licenseRequestValidator: LicenseRequestValidator;
 
     constructor() {
         super();
         this.mediator = new Mediator();
-        this.licenseRequestValidator = new LicenseRequestValidator();
     }
 
     // "GET license status of business given its RBQ number"
     @Get("/rbq/status/{rbqNum}")
     public async getStatusByRbq(rbqNum: string): Promise<BusinessStatusModel> {
-        if (!this.licenseRequestValidator.validateRbqNumber(rbqNum)) {
+        if (!validateRbqNumber(rbqNum)) {
             throw new InvalidRbqNumberException(rbqNum);
         }
 
@@ -37,7 +35,7 @@ export class LicenseController extends Controller {
     // "GET info of business given its RBQ number"
     @Get("/rbq/{rbqNum}")
     public async getInfoByRbq(rbqNum: string): Promise<BusinessInfoModel> {
-        if (!this.licenseRequestValidator.validateRbqNumber(rbqNum)) {
+        if (!validateRbqNumber(rbqNum)) {
             throw new InvalidRbqNumberException(rbqNum);
         }
 
@@ -49,8 +47,8 @@ export class LicenseController extends Controller {
 
     // "GET license status of business given its NEQ ID"
     @Get("/neq/status/{neqId}")
-    public async getStatusByNeq(neqId: number): Promise<BusinessStatusModel> {
-        if (!this.licenseRequestValidator.validateNeqId(neqId)) {
+    public async getStatusByNeq(neqId: string): Promise<BusinessStatusModel> {
+        if (!validateNeqId(neqId)) {
             throw new InvalidNeqIdException(neqId);
         }
 
@@ -62,8 +60,8 @@ export class LicenseController extends Controller {
 
     // "GET info of business given its NEQ ID"
     @Get("/neq/{neqId}")
-    public async getInfoByNeq(neqId: number): Promise<BusinessInfoModel> {
-        if (!this.licenseRequestValidator.validateNeqId(neqId)) {
+    public async getInfoByNeq(neqId: string): Promise<BusinessInfoModel> {
+        if (!validateNeqId(neqId)) {
             throw new InvalidNeqIdException(neqId);
         }
 

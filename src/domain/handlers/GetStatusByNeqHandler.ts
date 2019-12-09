@@ -2,11 +2,12 @@ import { Handler, ICommandHandler } from "tsmediator";
 import { Container } from "typedi";
 import { BusinessInfoModel } from "../../api/models/businessInfo";
 import { BusinessStatusModel } from "../../api/models/businessStatus";
+import { SearchType } from "../../common/enums/SearchType";
 import { IWebCrawler } from "../../interfaces/services/IWebCrawler";
 import { RbqWebCrawler } from "../../services/RbqWebCrawler";
 
 @Handler(GetStatusByNeqHandler.Type)
-export class GetStatusByNeqHandler implements ICommandHandler<number, Promise<BusinessStatusModel>> {
+export class GetStatusByNeqHandler implements ICommandHandler<string, Promise<BusinessStatusModel>> {
     private crawler: IWebCrawler<BusinessInfoModel>;
 
     constructor() {
@@ -17,9 +18,9 @@ export class GetStatusByNeqHandler implements ICommandHandler<number, Promise<Bu
         return "GetStatusByNeq";
     }
 
-    public async Handle(neqId: number): Promise<BusinessStatusModel> {
+    public async Handle(neqId: string): Promise<BusinessStatusModel> {
         // Run the crawler to scrape info needed.
-        await this.crawler.run(neqId);
+        await this.crawler.run(neqId, SearchType.NEQ);
 
         const businessInfo = this.crawler.getInfo();
 

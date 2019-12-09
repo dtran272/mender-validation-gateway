@@ -1,4 +1,4 @@
-import { StatusType } from "../../common/enums/status";
+import { StatusType } from "../../common/enums/StatusType";
 import { IBusinessStatus } from "../../interfaces/models/IBusiness";
 
 export class BusinessStatusModel implements IBusinessStatus {

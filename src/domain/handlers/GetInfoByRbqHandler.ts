@@ -1,6 +1,7 @@
 import { Handler, ICommandHandler } from "tsmediator";
 import { Container } from "typedi";
 import { BusinessInfoModel } from "../../api/models/businessInfo";
+import { SearchType } from "../../common/enums/SearchType";
 import { IWebCrawler } from "../../interfaces/services/IWebCrawler";
 import { RbqWebCrawler } from "../../services/RbqWebCrawler";
 
@@ -18,7 +19,7 @@ export class GetInfoByRbqHandler implements ICommandHandler<string, Promise<Busi
 
     public async Handle(rbqNum: string): Promise<BusinessInfoModel> {
         // Run the crawler to scrape info needed.
-        await this.crawler.run(rbqNum);
+        await this.crawler.run(rbqNum, SearchType.RBQ);
 
         return this.crawler.getInfo();
     }
