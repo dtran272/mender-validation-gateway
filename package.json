@@ -11,7 +11,8 @@
         "build": "npm run clean && tsc -p .",
         "watch": "tsc -p . -w",
         "generate": "tsoa routes && tsoa swagger",
-        "lint": "tslint -c tslint.json src/*.ts"
+        "lint": "tslint -c tslint.json src/*.ts",
+        "test": "jest"
     },
     "keywords": [],
     "author": "",
