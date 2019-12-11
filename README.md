@@ -1,5 +1,5 @@
 # mender-validation-gateway
-Mender's Validation Gateway is a REST API built with Node-js and Express-js framework, written in Typescript.\  
+Mender's Validation Gateway is a REST API built with Node-js and Express-js framework, written in Typescript.\
 The Validation Gateway validates all documentations submitted within the Mender app.\
 Either it is with the RBQ license, Home Inspector license and etc...\
 The Validation Gateway uses a crawler to help with the validation of information.
