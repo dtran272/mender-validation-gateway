@@ -4,6 +4,8 @@ The Validation Gateway validates all documentations submitted within the Mender 
 Either it is with the RBQ license, Home Inspector license and etc...\
 The Validation Gateway uses a crawler to help with the validation of information.
 
+First off run: npm install
+
 HOW TO RUN WEB APP IN DEV:
 
 Within the project dir run the following script commands:
