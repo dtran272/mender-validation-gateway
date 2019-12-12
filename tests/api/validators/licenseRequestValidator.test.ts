@@ -1,6 +1,6 @@
 import { validateNeqId, validateRbqNumber } from "../../../src/api/validators/licenseRequestValidator";
 
-describe("The licenseRequestValidator", () => {
+describe("The licenseRequestValidator tests", () => {
     describe("when validating NEQ ID", () => {
         test.each`
             neqId                | expected

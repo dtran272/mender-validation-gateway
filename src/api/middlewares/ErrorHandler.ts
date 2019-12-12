@@ -1,9 +1,9 @@
-import { NextFunction, Request, Response, response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { HttpException } from "../../exceptions/HttpException";
 
 export function errorHandler(err: HttpException, req: Request, res: Response, next: NextFunction) {
-    const status = err.status || 500;
-    const message = err.message || "An error has occured.";
+    const status = err.status;
+    const message = err.message;
 
-    res.status(status).send({ status, message });
+    res.status(status).send(message);
 }
