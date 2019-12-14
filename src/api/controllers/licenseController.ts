@@ -1,5 +1,6 @@
 import { Mediator } from "tsmediator";
 import { Controller, Get, Route } from "tsoa";
+import Container from "typedi";
 import { GetInfoByNeqHandler } from "../../domain/handlers/GetInfoByNeqHandler";
 import { GetInfoByRbqHandler } from "../../domain/handlers/GetInfoByRbqHandler";
 import { GetStatusByNeqHandler } from "../../domain/handlers/GetStatusByNeqHandler";
@@ -16,7 +17,7 @@ export class LicenseController extends Controller {
 
     constructor() {
         super();
-        this.mediator = new Mediator();
+        this.mediator = Container.get<Mediator>("tsmediator");
     }
 
     // "GET license status of business given its RBQ number"
