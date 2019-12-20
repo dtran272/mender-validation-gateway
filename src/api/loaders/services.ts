@@ -2,7 +2,7 @@
 import "reflect-metadata";
 import { Mediator } from "tsmediator";
 import { Container } from "typedi";
-import { RbqWebCrawler } from "../../services/RbqWebCrawler";
+import RbqWebCrawler from "../../services/RbqWebCrawler";
 
 export default async () => {
     // Initialize DI

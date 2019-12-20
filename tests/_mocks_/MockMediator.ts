@@ -1,10 +1,10 @@
-import { BusinessInfoModel } from "../../src/api/models/businessInfo";
-import { BusinessStatusModel } from "../../src/api/models/businessStatus";
+import BusinessInfoModel from "../../src/api/models/businessInfo";
+import BusinessStatusModel from "../../src/api/models/businessStatus";
 import { StatusType } from "../../src/common/enums/StatusType";
-import { GetInfoByNeqHandler } from "../../src/domain/handlers/GetInfoByNeqHandler";
-import { GetInfoByRbqHandler } from "../../src/domain/handlers/GetInfoByRbqHandler";
-import { GetStatusByNeqHandler } from "../../src/domain/handlers/GetStatusByNeqHandler";
-import { GetStatusByRbqHandler } from "../../src/domain/handlers/GetStatusByRbqHandler";
+import GetInfoByNeqHandler from "../../src/domain/handlers/GetInfoByNeqHandler";
+import GetInfoByRbqHandler from "../../src/domain/handlers/GetInfoByRbqHandler";
+import GetStatusByNeqHandler from "../../src/domain/handlers/GetStatusByNeqHandler";
+import GetStatusByRbqHandler from "../../src/domain/handlers/GetStatusByRbqHandler";
 
 const mockBusinessInfoModel = new BusinessInfoModel(
     "Home Depot",
@@ -21,7 +21,7 @@ const mockBusinessInfoModel = new BusinessInfoModel(
 
 const mockBusinessStatusModel = new BusinessStatusModel("Home Depot", "RBQ", 0, StatusType.VALIDE);
 
-export class MockMediator {
+export default class MockMediator {
     public async Send(command: string, payload: any): Promise<any> {
         switch (command) {
             case GetStatusByRbqHandler.Type:

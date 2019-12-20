@@ -1,10 +1,10 @@
 import Container from "typedi";
 import { LicenseController } from "../../../src/api/controllers/licenseController";
-import { BusinessInfoModel } from "../../../src/api/models/businessInfo";
-import { BusinessStatusModel } from "../../../src/api/models/businessStatus";
-import { InvalidNeqIdException } from "../../../src/exceptions/InvalidNeqIdException";
-import { InvalidRbqNumberException } from "../../../src/exceptions/InvalidRbqNumberException";
-import { MockMediator } from "../../_mocks_/MockMediator";
+import BusinessInfoModel from "../../../src/api/models/businessInfo";
+import BusinessStatusModel from "../../../src/api/models/businessStatus";
+import InvalidNeqIdException from "../../../src/exceptions/InvalidNeqIdException";
+import InvalidRbqNumberException from "../../../src/exceptions/InvalidRbqNumberException";
+import MockMediator from "../../_mocks_/MockMediator";
 
 let licenseController: LicenseController;
 
@@ -15,7 +15,7 @@ describe("The LicenseController tests", () => {
         licenseController = new LicenseController();
     });
 
-    describe("when calling getStatusByRbq", () => {
+    describe("when calling getStatusByRbq method", () => {
         test("should return 400 BAD REQUEST, with invalid RBQ number", async () => {
             const rbqNum = "invalidRbq";
             const expectedError = new InvalidRbqNumberException(rbqNum);
@@ -39,7 +39,7 @@ describe("The LicenseController tests", () => {
         });
     });
 
-    describe("when calling getInfoByRbq", () => {
+    describe("when calling getInfoByRbq method", () => {
         test("should return 400 BAD REQUEST, with invalid RBQ number", async () => {
             const rbqNum = "invalidRbq";
             const expectedError = new InvalidRbqNumberException(rbqNum);
@@ -63,7 +63,7 @@ describe("The LicenseController tests", () => {
         });
     });
 
-    describe("when calling getStatusByNeq", () => {
+    describe("when calling getStatusByNeq method", () => {
         test("should return 400 BAD REQUEST, with invalid NEQ ID", async () => {
             const neqId = "invalidNeq";
             const expectedError = new InvalidNeqIdException(neqId);
@@ -87,7 +87,7 @@ describe("The LicenseController tests", () => {
         });
     });
 
-    describe("when calling getInfoByNeq", () => {
+    describe("when calling getInfoByNeq method", () => {
         test("should return 400 BAD REQUEST, with invalid NEQ ID", async () => {
             const neqId = "invalidNeq";
             const expectedError = new InvalidNeqIdException(neqId);

@@ -1,6 +1,6 @@
-import { HttpException } from "./HttpException";
+import HttpException from "./HttpException";
 
-export class InvalidRbqNumberException extends HttpException {
+export default class InvalidRbqNumberException extends HttpException {
     constructor(rbqNum: string) {
         super(
             400,

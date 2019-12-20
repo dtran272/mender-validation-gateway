@@ -27,8 +27,7 @@
 					"type": "boolean"
 				},
 				"neqId": {
-					"type": "number",
-					"format": "double"
+					"type": "string"
 				}
 			},
 			"required": [
@@ -64,8 +63,7 @@
 					"format": "date-time"
 				},
 				"neqId": {
-					"type": "number",
-					"format": "double"
+					"type": "string"
 				},
 				"address": {
 					"type": "string"

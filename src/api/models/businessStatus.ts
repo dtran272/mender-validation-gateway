@@ -1,14 +1,14 @@
 import { StatusType } from "../../common/enums/StatusType";
-import { IBusinessStatus } from "../../interfaces/models/IBusiness";
+import IBusinessStatus from "../../interfaces/models/IBusinessStatus";
 
-export class BusinessStatusModel implements IBusinessStatus {
+export default class BusinessStatusModel implements IBusinessStatus {
     public name: string;
     public rbqNum: string;
-    public neqId: number;
+    public neqId: string;
     public status: StatusType;
     public isValid: boolean;
 
-    constructor(name: string, rbqNum: string, neqId: number, status: StatusType) {
+    constructor(name: string, rbqNum: string, neqId: string, status: StatusType) {
         this.name = name;
         this.rbqNum = rbqNum;
         this.neqId = neqId;

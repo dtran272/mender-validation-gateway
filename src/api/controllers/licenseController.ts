@@ -1,14 +1,14 @@
 import { Mediator } from "tsmediator";
 import { Controller, Get, Route } from "tsoa";
 import Container from "typedi";
-import { GetInfoByNeqHandler } from "../../domain/handlers/GetInfoByNeqHandler";
-import { GetInfoByRbqHandler } from "../../domain/handlers/GetInfoByRbqHandler";
-import { GetStatusByNeqHandler } from "../../domain/handlers/GetStatusByNeqHandler";
-import { GetStatusByRbqHandler } from "../../domain/handlers/GetStatusByRbqHandler";
-import { InvalidNeqIdException } from "../../exceptions/InvalidNeqIdException";
-import { InvalidRbqNumberException } from "../../exceptions/InvalidRbqNumberException";
-import { BusinessInfoModel } from "../models/businessInfo";
-import { BusinessStatusModel } from "../models/businessStatus";
+import GetInfoByNeqHandler from "../../domain/handlers/GetInfoByNeqHandler";
+import GetInfoByRbqHandler from "../../domain/handlers/GetInfoByRbqHandler";
+import GetStatusByNeqHandler from "../../domain/handlers/GetStatusByNeqHandler";
+import GetStatusByRbqHandler from "../../domain/handlers/GetStatusByRbqHandler";
+import InvalidNeqIdException from "../../exceptions/InvalidNeqIdException";
+import InvalidRbqNumberException from "../../exceptions/InvalidRbqNumberException";
+import BusinessInfoModel from "../models/businessInfo";
+import BusinessStatusModel from "../models/businessStatus";
 import { validateNeqId, validateRbqNumber } from "../validators/licenseRequestValidator";
 
 @Route("/license")

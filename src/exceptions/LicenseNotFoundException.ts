@@ -1,7 +1,7 @@
 import { SearchType } from "../common/enums/SearchType";
-import { HttpException } from "./HttpException";
+import HttpException from "./HttpException";
 
-export class LicenseNotFoundException extends HttpException {
+export default class LicenseNotFoundException extends HttpException {
     constructor(id: string, searchType: SearchType, err: any) {
         let message = "";
 

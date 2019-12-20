@@ -1,10 +1,10 @@
-import { errorHandler } from "../../../src/api/middlewares/errorHandler";
+import errorHandler from "../../../src/api/middlewares/errorHandler";
 import { SearchType } from "../../../src/common/enums/SearchType";
-import { HttpException } from "../../../src/exceptions/HttpException";
-import { InvalidNeqIdException } from "../../../src/exceptions/InvalidNeqIdException";
-import { InvalidRbqNumberException } from "../../../src/exceptions/InvalidRbqNumberException";
-import { LicenseNotFoundException } from "../../../src/exceptions/LicenseNotFoundException";
-import { WebScrappingException } from "../../../src/exceptions/WebScrappingException";
+import HttpException from "../../../src/exceptions/HttpException";
+import InvalidNeqIdException from "../../../src/exceptions/InvalidNeqIdException";
+import InvalidRbqNumberException from "../../../src/exceptions/InvalidRbqNumberException";
+import LicenseNotFoundException from "../../../src/exceptions/LicenseNotFoundException";
+import WebScrappingException from "../../../src/exceptions/WebScrapingException";
 
 const mockedResponse = () => {
     const res = {} as any;
