@@ -1,14 +1,14 @@
 import { StatusType } from "../../common/enums/StatusType";
-import { IBusiness } from "../../interfaces/models/IBusiness";
+import IBusinessInfo from "../../interfaces/models/IBusinessInfo";
 
-export class BusinessInfoModel implements IBusiness {
+export default class BusinessInfoModel implements IBusinessInfo {
     public name: string;
     public otherName: string;
     public rbqNum: string;
     public status: StatusType;
     public deliveranceDate: Date;
     public paymentDate: Date;
-    public neqId: number;
+    public neqId: string;
     public address: string;
     public email: string;
     public telephone: string;
@@ -21,7 +21,7 @@ export class BusinessInfoModel implements IBusiness {
         status: string,
         deliveranceDate: Date,
         paymentDate: Date,
-        neqId: number,
+        neqId: string,
         address: string,
         email: string,
         telephone: string
@@ -33,7 +33,7 @@ export class BusinessInfoModel implements IBusiness {
         status?: string,
         deliveranceDate?: Date,
         paymentDate?: Date,
-        neqId?: number,
+        neqId?: string,
         address?: string,
         email?: string,
         telephone?: string

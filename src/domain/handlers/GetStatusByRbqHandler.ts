@@ -1,13 +1,13 @@
 import { Handler, ICommandHandler } from "tsmediator";
 import { Container } from "typedi";
-import { BusinessInfoModel } from "../../api/models/businessInfo";
+import BusinessInfoModel from "../../api/models/businessInfo";
 import { SearchType } from "../../common/enums/SearchType";
-import { IWebCrawler } from "../../interfaces/services/IWebCrawler";
-import { RbqWebCrawler } from "../../services/RbqWebCrawler";
-import { BusinessStatusModel } from "./../../api/models/businessStatus";
+import IWebCrawler from "../../interfaces/services/IWebCrawler";
+import RbqWebCrawler from "../../services/RbqWebCrawler";
+import BusinessStatusModel from "./../../api/models/businessStatus";
 
 @Handler(GetStatusByRbqHandler.Type)
-export class GetStatusByRbqHandler implements ICommandHandler<string, Promise<BusinessStatusModel>> {
+export default class GetStatusByRbqHandler implements ICommandHandler<string, Promise<BusinessStatusModel>> {
     private crawler: IWebCrawler<BusinessInfoModel>;
 
     constructor() {

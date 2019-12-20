@@ -2,14 +2,14 @@ import puppeteer from "puppeteer";
 import { TimeoutError } from "puppeteer/Errors";
 import { Service } from "typedi";
 import config from "../api/config/config";
-import { BusinessInfoModel } from "../api/models/businessInfo";
+import BusinessInfoModel from "../api/models/businessInfo";
 import { SearchType } from "../common/enums/SearchType";
-import { LicenseNotFoundException } from "../exceptions/LicenseNotFoundException";
-import { WebScrappingException } from "../exceptions/WebScrappingException";
-import { IWebCrawler } from "../interfaces/services/IWebCrawler";
+import LicenseNotFoundException from "../exceptions/LicenseNotFoundException";
+import WebScrapingException from "../exceptions/WebScrapingException";
+import IWebCrawler from "../interfaces/services/IWebCrawler";
 
 @Service("rbq.webCralwer")
-export class RbqWebCrawler implements IWebCrawler<BusinessInfoModel> {
+export default class RbqWebCrawler implements IWebCrawler<BusinessInfoModel> {
     private baseUrl: string;
     private model: BusinessInfoModel;
 
@@ -99,7 +99,7 @@ export class RbqWebCrawler implements IWebCrawler<BusinessInfoModel> {
                 throw new LicenseNotFoundException(id, searchType, e);
             }
 
-            throw new WebScrappingException(e);
+            throw new WebScrapingException(e);
         }
     }
 }
