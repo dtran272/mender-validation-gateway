@@ -1,29 +1,27 @@
 import Container from "typedi";
 import BusinessInfoModel from "../../../src/api/models/businessInfo";
-import { SearchType } from "../../../src/common/enums/SearchType";
-import GetInfoByNeqHandler from "../../../src/domain/handlers/GetInfoByNeqHandler";
+import GetInfoByRbqHandler from "../../../src/domain/handlers/GetInfoByRbqHandler";
 import RbqWebCrawler from "../../../src/services/RbqWebCrawler";
+import { SearchType } from "./../../../src/common/enums/SearchType";
 
-jest.mock("../../../src/services/RbqWebCrawler");
+let handler: GetInfoByRbqHandler;
 
-let handler: GetInfoByNeqHandler;
-
-const NeqId = "1234567890";
+const RbqNum = "1234-5678-90";
 
 const ExpectedBusinessInfoModel = new BusinessInfoModel(
     "Home Depot",
     "Reno Depot",
-    "RBQ",
+    RbqNum,
     "Valide",
     new Date(2019, 12, 12),
     new Date(2019, 12, 12),
-    NeqId,
+    "1234567890",
     "123 street",
     "home@depot.com",
     "514-123-4958"
 );
 
-describe("The GetInfoByNeqHandler tests", () => {
+describe("The GetInfoByRbqHandler tests", () => {
     beforeAll(() => {
         const mockRun = jest.fn(
             (id: string, type: SearchType): Promise<void> => {
@@ -43,12 +41,12 @@ describe("The GetInfoByNeqHandler tests", () => {
 
         Container.set("rbq.webCrawler", new RbqWebCrawler());
 
-        handler = new GetInfoByNeqHandler();
+        handler = new GetInfoByRbqHandler();
     });
 
     describe("when calling get Type method of class", () => {
-        test("should return its own class name: GetInfoByNeq", () => {
-            expect(GetInfoByNeqHandler.Type).toEqual("GetInfoByNeq");
+        test("should return its own class name: GetInfoByRbq", () => {
+            expect(GetInfoByRbqHandler.Type).toEqual("GetInfoByRbq");
         });
     });
 
@@ -56,9 +54,9 @@ describe("The GetInfoByNeqHandler tests", () => {
         test("should execute the web crawler and return a model", async () => {
             expect.assertions(3);
 
-            const expectedModel = await handler.Handle(NeqId);
+            const expectedModel = await handler.Handle(RbqNum);
 
-            expect(RbqWebCrawler.prototype.run).toHaveBeenCalledWith(NeqId, SearchType.NEQ);
+            expect(RbqWebCrawler.prototype.run).toHaveBeenCalledWith(RbqNum, SearchType.RBQ);
             expect(RbqWebCrawler.prototype.getInfo).toHaveBeenCalled();
             expect(expectedModel).toEqual(ExpectedBusinessInfoModel);
         });

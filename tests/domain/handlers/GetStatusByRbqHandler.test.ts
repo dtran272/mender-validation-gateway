@@ -1,41 +1,41 @@
 import Container from "typedi";
 import BusinessInfoModel from "../../../src/api/models/businessInfo";
+import BusinessStatusModel from "../../../src/api/models/businessStatus";
 import { SearchType } from "../../../src/common/enums/SearchType";
-import GetInfoByNeqHandler from "../../../src/domain/handlers/GetInfoByNeqHandler";
+import GetStatusByRbqHandler from "../../../src/domain/handlers/GetStatusByRbqHandler";
 import RbqWebCrawler from "../../../src/services/RbqWebCrawler";
 
 jest.mock("../../../src/services/RbqWebCrawler");
 
-let handler: GetInfoByNeqHandler;
+let handler: GetStatusByRbqHandler;
 
-const NeqId = "1234567890";
+const RbqNum = "1234-5678-90";
 
-const ExpectedBusinessInfoModel = new BusinessInfoModel(
+const TestBusinessInfoModel = new BusinessInfoModel(
     "Home Depot",
     "Reno Depot",
-    "RBQ",
+    RbqNum,
     "Valide",
     new Date(2019, 12, 12),
     new Date(2019, 12, 12),
-    NeqId,
+    "1234567890",
     "123 street",
     "home@depot.com",
     "514-123-4958"
 );
 
-describe("The GetInfoByNeqHandler tests", () => {
+describe("The GetStatusByRbqHandler tests", () => {
     beforeAll(() => {
         const mockRun = jest.fn(
             (id: string, type: SearchType): Promise<void> => {
-                // tslint:disable-next-line: no-shadowed-variable
-                return new Promise<void>((resolve, reject) => {
+                return new Promise<void>((resolve, rejects) => {
                     resolve();
                 });
             }
         );
 
         const mockGetInfo = jest.fn(() => {
-            return ExpectedBusinessInfoModel;
+            return TestBusinessInfoModel;
         });
 
         RbqWebCrawler.prototype.run = mockRun;
@@ -43,12 +43,12 @@ describe("The GetInfoByNeqHandler tests", () => {
 
         Container.set("rbq.webCrawler", new RbqWebCrawler());
 
-        handler = new GetInfoByNeqHandler();
+        handler = new GetStatusByRbqHandler();
     });
 
     describe("when calling get Type method of class", () => {
-        test("should return its own class name: GetInfoByNeq", () => {
-            expect(GetInfoByNeqHandler.Type).toEqual("GetInfoByNeq");
+        test("should return its own class name: GetStatusByRbq", () => {
+            expect(GetStatusByRbqHandler.Type).toEqual("GetStatusByRbq");
         });
     });
 
@@ -56,11 +56,18 @@ describe("The GetInfoByNeqHandler tests", () => {
         test("should execute the web crawler and return a model", async () => {
             expect.assertions(3);
 
-            const expectedModel = await handler.Handle(NeqId);
+            const expectedModel = new BusinessStatusModel(
+                TestBusinessInfoModel.name,
+                TestBusinessInfoModel.rbqNum,
+                TestBusinessInfoModel.neqId,
+                TestBusinessInfoModel.status
+            );
 
-            expect(RbqWebCrawler.prototype.run).toHaveBeenCalledWith(NeqId, SearchType.NEQ);
+            const model = await handler.Handle(RbqNum);
+
+            expect(RbqWebCrawler.prototype.run).toHaveBeenCalledWith(RbqNum, SearchType.RBQ);
             expect(RbqWebCrawler.prototype.getInfo).toHaveBeenCalled();
-            expect(expectedModel).toEqual(ExpectedBusinessInfoModel);
+            expect(model).toEqual(expectedModel);
         });
     });
 });
